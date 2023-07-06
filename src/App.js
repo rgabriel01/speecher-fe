@@ -1,9 +1,14 @@
+import React from 'react'
+import { BrowserRouter } from 'react-router-dom'
 import Layout from './components/layout'
-import './App.less';
+import './App.less'
+
 
 function App() {
   return (
-    <Layout />
+    <BrowserRouter>
+      <Layout />
+    </BrowserRouter>
   )
 }
 
