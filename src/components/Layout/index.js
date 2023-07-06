@@ -1,14 +1,22 @@
 import React from 'react'
-import {Col, Row } from 'antd'
+import { Layout } from 'antd'
 
-const Layout = () => {
+import Sidebar from './sidebar'
+import './styles.less'
+
+const { Header } = Layout
+
+const AppLayout = () => {
   return (
-    <Row>
-      <Col>
-        HENLOOO
-      </Col>
-    </Row>
+    <Layout hasSider>
+      <Sidebar />
+      <Layout>
+        <Header className='main-header'>
+          Hello, Raymond Gabriel!
+        </Header>
+      </Layout>
+    </Layout>
   )
 }
 
-export default Layout
+export default AppLayout
