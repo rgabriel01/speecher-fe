@@ -1,26 +1,40 @@
-import React from 'react'
-import { Button, DatePicker, Form, Input } from 'antd'
+import React, { useEffect } from 'react'
+import { Button, DatePicker, Form, Input, Select } from 'antd'
 import useSearchSpeeches from '../../customhooks/speeches/useSearchSpeeches'
+import useGetUsers from  '../../customhooks/users/useGetUsers'
 import List from './list'
+
 const { useForm } = Form
 const { RangePicker } = DatePicker
 
 const SearchSpeeches = () => {
   const [form] = useForm()
   const [responseData, doSearchSpeeches] = useSearchSpeeches()
+  const [usersResponseData, getUsers] = useGetUsers()
+  const authorOptions = (usersResponseData?.data || [])
+    .map(({ attributes: { id, full_name }}) => ({ value: id, label: full_name }))
+
+  useEffect(() => {
+    getUsers()
+    // eslint-disable-next-line
+  }, [])
 
   const onFinish = (values) => {
     const {
+      author_id,
       body,
       date_range
     } = values
-
+    const cleanDateRange = date_range != null
+      ? [
+          date_range[0].format('YYYY-MM-DD'),
+          date_range[1].format('YYYY-MM-DD'),
+        ]
+      : []
     const variables = {
+      author_id,
       body,
-      date_range: [
-        date_range[0].format('YYYY-MM-DD'),
-        date_range[1].format('YYYY-MM-DD'),
-      ]
+      date_range: cleanDateRange
     }
     doSearchSpeeches({ variables })
   }
@@ -45,6 +59,17 @@ const SearchSpeeches = () => {
         }}
         onFinish={onFinish}
       >
+        <Form.Item name='author_id' label='Author'>
+          <Select
+            options={
+              [
+                {value: null, label: 'All Authors'},
+                ...authorOptions
+              ]
+            }
+          />
+        </Form.Item>
+
         <Form.Item name='body' label='body'>
           <Input />
         </Form.Item>
