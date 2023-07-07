@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import axios from 'axios'
+import env from '../../../env'
 
 const useGetUsers = () => {
   const [responseData, setResponseData] = useState({
@@ -17,7 +18,7 @@ const useGetUsers = () => {
 
     return axios
       .get(
-        `http://localhost:3000/users`,
+        `http://${env.BACKEND_HOST}/users`,
         {},
         {
           headers: { 'Content-Type': 'application/json' },

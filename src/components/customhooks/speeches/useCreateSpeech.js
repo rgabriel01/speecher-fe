@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import axios from 'axios'
+import env from '../../../env'
 
 const useCreateSpeech = ({ successCallback }) => {
   const [responseData, setResponseData] = useState({
@@ -17,7 +18,7 @@ const useCreateSpeech = ({ successCallback }) => {
 
     return axios
       .post(
-        'http://localhost:3000/speeches/',
+        `http://${env.BACKEND_HOST}/speeches/`,
         { ...variables },
         {
           headers: { 'Content-Type': 'application/json' },

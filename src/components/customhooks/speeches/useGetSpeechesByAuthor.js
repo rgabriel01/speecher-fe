@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import axios from 'axios'
+import env from '../../../env'
 
 const useGetSpeechesByAuthor = () => {
   const [responseData, setResponseData] = useState({
@@ -17,7 +18,7 @@ const useGetSpeechesByAuthor = () => {
 
     return axios
       .get(
-        `http://localhost:3000/speeches/fetch_by_author/${authorId}`,
+        `http://${env.BACKEND_HOST}/speeches/fetch_by_author/${authorId}`,
         {},
         {
           headers: { 'Content-Type': 'application/json' },

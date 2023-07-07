@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import axios from 'axios'
+import env from '../../../env'
 
 const useSearchSpeeches = () => {
   const [responseData, setResponseData] = useState({
@@ -17,7 +18,7 @@ const useSearchSpeeches = () => {
 
     return axios
       .get(
-        `http://localhost:3000/speeches/search`,
+        `http://${env.BACKEND_HOST}/speeches/search`,
         { params: { ...variables } },
         {
           headers: { 'Content-Type': 'application/json' },
