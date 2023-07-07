@@ -1,14 +1,24 @@
 import React from 'react'
-import { Button, DatePicker, Form, Input } from 'antd'
+import { Button, DatePicker, Form, Input, message } from 'antd'
 import useCreateSpeech from '../../customhooks/speeches/useCreateSpeech'
+import { requiredRule } from './rules'
 import './styles.less'
 
 const { useForm } = Form
 const { TextArea } = Input
 
+const successCallback = () => {
+  message.success('Speech created!', 3)
+  setTimeout(() => {
+    window.location.reload()
+  }, 3000)
+}
+
 const SpeechForm = () => {
   const [form] = useForm()
-  const [responseData, createSpeech] = useCreateSpeech()
+  const [responseData, createSpeech] = useCreateSpeech({
+    successCallback
+  })
 
   const onFinish = (values) => {
     const {
@@ -23,7 +33,19 @@ const SpeechForm = () => {
       date: date.format('YYYY-MM-DD')
     }
 
-    createSpeech({ variables })
+    form
+      .validateFields()
+      .then(() => {
+        createSpeech({ variables })
+      })
+  }
+
+  const clearInput = () => {
+    form.setFieldsValue({
+      title: '',
+      body: '',
+      date: ''
+    })
   }
 
   return (
@@ -37,13 +59,13 @@ const SpeechForm = () => {
       }}
       onFinish={onFinish}
     >
-      <Form.Item name='title' label='Title'>
+      <Form.Item name='title' label='Title' rules={requiredRule}>
         <Input />
       </Form.Item>
-      <Form.Item name='body' label='Body'>
+      <Form.Item name='body' label='Body' rules={requiredRule}>
         <TextArea />
       </Form.Item>
-      <Form.Item name='date' label='Date'>
+      <Form.Item name='date' label='Date' rules={requiredRule}>
         <DatePicker />
       </Form.Item>
       <Form.Item
@@ -55,6 +77,7 @@ const SpeechForm = () => {
         <Button
           type='ghost'
           className='discard'
+          onClick={clearInput}
         >
           Discard
         </Button>

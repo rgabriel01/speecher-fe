@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import axios from 'axios'
 
-const useCreateSpeech = () => {
+const useCreateSpeech = ({ successCallback }) => {
   const [responseData, setResponseData] = useState({
     data: {},
     loading: false,
@@ -26,11 +26,14 @@ const useCreateSpeech = () => {
       )
         .then((response) => {
           const { data } = response?.data || {}
-          setResponseData({
-            data: data.attributes,
-            loading: false,
-            error: null
-          })
+          if (response?.statusText === 'OK') {
+            successCallback()
+            setResponseData({
+              data: data.attributes,
+              loading: false,
+              error: null
+            })
+          }
         })
         .catch((error) => {
           setResponseData({
