@@ -12,7 +12,7 @@ const Speeches = () => {
   const [activeTab, setActiveTab] = useState('0')
   return (
     <Row className='speeches-container'>
-      <Col>
+      <Col span={24}>
         <Tabs
           activeKey={activeTab}
           onChange={setActiveTab}

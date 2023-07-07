@@ -11,24 +11,27 @@ const View = () => {
 
   useEffect(() => {
     getSpeechesByAuthor({ authorId: 1 })
+    // eslint-disable-next-line
   }, [])
 
   const activeSpeech = useMemo(
     () => (responseData?.data || []).find(({ id }) => id === activeSpeechId)
-  , [activeSpeechId])
+  , [activeSpeechId, responseData])
 
   return (
     <Row>
 
-      <Col span={10}>
+      <Col span={6}>
         <Sidebar
           data={responseData?.data || []}
           setActiveSpeechId={setActiveSpeechId}
         />
       </Col>
 
-      <Col span={14}>
-        <Speech speech={activeSpeech}/>
+      <Col span={18}>
+        {activeSpeech &&
+          <Speech speech={activeSpeech}/>
+        }
       </Col>
 
     </Row>
