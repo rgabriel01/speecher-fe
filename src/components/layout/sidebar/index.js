@@ -1,6 +1,7 @@
 import React from 'react'
 import { Col, Layout, Menu, Row, Typography } from 'antd'
 import { Megaphone } from '../../../components/assets'
+import { Link } from 'react-router-dom'
 
 import './styles.less'
 
@@ -35,10 +36,14 @@ const Sidebar = () => {
           className='sidebar-nav'
         >
           <Item key='home'>
-            <span>Home</span>
+            <Link to='/' className='sidebar-link'>
+              <span>Home</span>
+            </Link>
           </Item>
           <Item key='speeches'>
-            <span>Speeches</span>
+            <Link to='/speeches' className='sidebar-link'>
+              <span>Speeches</span>
+            </Link>
           </Item>
         </Menu>
 

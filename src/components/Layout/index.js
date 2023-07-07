@@ -2,6 +2,7 @@ import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { Layout } from 'antd'
 import Home from '../home'
+import Speeches from '../speeches'
 
 import Sidebar from './sidebar'
 import './styles.less'
@@ -18,9 +19,10 @@ const AppLayout = () => {
           Hello, Raymond Gabriel!
         </Header>
 
-        <Content>
+        <Content className='site-content -main'>
           <Routes>
             <Route exact path='/' element={<Home />} />
+            <Route exact path='/speeches' element={<Speeches />} />
           </Routes>
         </Content>
 
