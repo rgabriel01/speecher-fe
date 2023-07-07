@@ -1,24 +1,28 @@
 import React from 'react'
 import { Col, Menu, Row } from 'antd'
-
 const { Item } = Menu
 
-const Sidebar = () => {
+const Sidebar = ({
+  data,
+  setActiveSpeechId
+}) => {
   return (
     <Row>
       <Col>
         <Menu
           mode='inline'
+          onClick={
+            ({ key }) => setActiveSpeechId(key)
+          }
         >
-          <Item key='id-1'>
-            <span>Some Speech title</span>
-          </Item>
-          <Item key='id-2'>
-            <span>Some Speech title</span>
-          </Item>
-          <Item key='id-3'>
-            <span>Some Speech title</span>
-          </Item>
+          {
+            (data || []).map(
+              ({ id, attributes: { title }}) => (
+                <Item key={id}>
+                  <span>{title}</span>
+                </Item>
+            ))
+          }
         </Menu>
       </Col>
     </Row>

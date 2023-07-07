@@ -1,6 +1,10 @@
 import React from 'react'
 
-const Speech = () => {
+const Speech = ({
+  speech
+}) => {
+  console.log('SPEECH', speech)
+
   return (
     <div>Speech body goes here</div>
   )
