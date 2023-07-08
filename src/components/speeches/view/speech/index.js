@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Button, Col, DatePicker, Divider, Form, Input, message, Row, Select } from 'antd'
 import moment from 'moment'
 import { requiredRule } from './rules'
@@ -21,6 +21,7 @@ const Speech = ({
 }) => {
   const { attributes: { id, body, speech_date, tags }} = speech
   const [form] = useForm()
+  // eslint-disable-next-line
   const [responseData, updateSpeech] = useUpdateSpeech({
     successCallback
   })
