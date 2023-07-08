@@ -1,5 +1,5 @@
 import React from 'react'
-import { Table } from 'antd'
+import { Table, Tag } from 'antd'
 
 const List = ({
   data
@@ -25,6 +25,20 @@ const List = ({
       title: 'Body',
       dataIndex: 'body',
       key: 'body'
+    },
+    {
+      title: 'Tags',
+      dataIndex: 'tags',
+      key: 'tags',
+      render: (tags) => {
+        if (tags != null) {
+          return (
+            <>
+              {tags.split(' ').map((tag) => (<Tag color='orange'>{tag}</Tag>))}
+            </>
+          )
+        }
+      }
     }
   ]
 

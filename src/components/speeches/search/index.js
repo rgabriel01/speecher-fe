@@ -23,7 +23,8 @@ const SearchSpeeches = () => {
     const {
       author_id,
       body,
-      date_range
+      date_range,
+      tags
     } = values
     const cleanDateRange = date_range != null
       ? [
@@ -34,7 +35,8 @@ const SearchSpeeches = () => {
     const variables = {
       author_id,
       body,
-      date_range: cleanDateRange
+      date_range: cleanDateRange,
+      tags
     }
     doSearchSpeeches({ variables })
   }
@@ -76,6 +78,13 @@ const SearchSpeeches = () => {
 
         <Form.Item name='date_range' label='Date Range'>
           <RangePicker />
+        </Form.Item>
+
+        <Form.Item name='tags' label='Tags'>
+          <Select
+            mode='tags'
+            placeholder='Tags'
+          />
         </Form.Item>
 
         <Form.Item
