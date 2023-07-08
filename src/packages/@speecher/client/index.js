@@ -3,6 +3,8 @@ import React, { useContext, createContext } from 'react'
 export const SpeecherContext = createContext({
   user: {
     id: '',
+    email: '',
+    full_name: ''
   }
 })
 

@@ -45,8 +45,12 @@ const Sidebar = () => {
               <span>Speeches</span>
             </Link>
           </Item>
+          <Item key='logout'>
+            <Link to='/logout' className='sidebar-link'>
+              <span>Logout</span>
+            </Link>
+          </Item>
         </Menu>
-
       </div>
     </Sider>
   )
