@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Button, Col, DatePicker, Divider, Form, Input, message, Row } from 'antd'
+import { Button, Col, DatePicker, Divider, Form, Input, message, Row, Select } from 'antd'
 import moment from 'moment'
 import { requiredRule } from './rules'
 import Paper from './paper'
@@ -19,29 +19,31 @@ const successCallback = () => {
 const Speech = ({
   speech
 }) => {
-  const { attributes: { id, body, speech_date }} = speech
+  const { attributes: { id, body, speech_date, tags }} = speech
   const [form] = useForm()
   const [responseData, updateSpeech] = useUpdateSpeech({
     successCallback
   })
   const initialValues = {
     body,
-    date: moment(speech_date)
+    date: moment(speech_date),
+    tags: tags ? tags.split(' ') : []
   }
   const [paperBody, setPaperBody] = useState(body)
   const onFinish = (values) => {
     const {
       body,
-      date
+      date,
+      tags
     } = values
 
     const variables = {
       id,
       body,
-      date: date.format('YYYY-MM-DD')
+      date: date.format('YYYY-MM-DD'),
+      tags: (tags || []).join(' ')
     }
     updateSpeech({ variables })
-    console.log('onFinish', values)
   }
   const onDelete = () => {
     const variables = {
@@ -51,11 +53,6 @@ const Speech = ({
 
     updateSpeech({ variables })
   }
-
-  useEffect(() => {
-    console.log('testo', form.getFieldValue('body'))
-    setPaperBody(form.getFieldValue('body'))
-  }, [form.getFieldValue('body')])
 
   return (
     <>
@@ -71,6 +68,12 @@ const Speech = ({
             </Form.Item>
             <Form.Item name='date' label='Date' rules={requiredRule}>
               <DatePicker />
+            </Form.Item>
+            <Form.Item name='tags' label='Tags'>
+              <Select
+                mode='tags'
+                placeholder='Tags'
+              />
             </Form.Item>
             <Form.Item
               wrapperCol={{

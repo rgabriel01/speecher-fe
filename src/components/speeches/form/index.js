@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, DatePicker, Form, Input, message } from 'antd'
+import { Button, DatePicker, Form, Input, message, Select } from 'antd'
 import useCreateSpeech from '../../customhooks/speeches/useCreateSpeech'
 import { useSpeecher } from '@speecher/client'
 import { requiredRule } from './rules'
@@ -26,13 +26,15 @@ const SpeechForm = () => {
     const {
       title,
       body,
-      date
+      date,
+      tags
     } = values
     const variables = {
       title,
       body,
       user_id: user.id,
-      date: date.format('YYYY-MM-DD')
+      date: date.format('YYYY-MM-DD'),
+      tags: (tags || []).join(' ')
     }
 
     form
@@ -69,6 +71,12 @@ const SpeechForm = () => {
       </Form.Item>
       <Form.Item name='date' label='Date' rules={requiredRule}>
         <DatePicker />
+      </Form.Item>
+      <Form.Item name='tags' label='Tags'>
+        <Select
+          mode='tags'
+          placeholder='Tags'
+        />
       </Form.Item>
       <Form.Item
         wrapperCol={{
