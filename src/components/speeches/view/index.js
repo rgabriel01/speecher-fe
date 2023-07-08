@@ -2,15 +2,17 @@ import React, { useEffect, useState, useMemo } from 'react'
 import { Col, Row } from 'antd'
 import Speech from './speech'
 import Sidebar from './sidebar'
+import { useSpeecher } from '@speecher/client'
 
 import useGetSpeechesByAuthor from '../../customhooks/speeches/useGetSpeechesByAuthor'
 
 const View = () => {
+  const  { user } = useSpeecher()
   const [activeSpeechId, setActiveSpeechId] = useState(null)
   const [responseData, getSpeechesByAuthor] = useGetSpeechesByAuthor()
 
   useEffect(() => {
-    getSpeechesByAuthor({ authorId: 1 })
+    getSpeechesByAuthor({ authorId: user.id })
     // eslint-disable-next-line
   }, [])
 

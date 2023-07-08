@@ -1,6 +1,7 @@
 import React from 'react'
 import { Button, DatePicker, Form, Input, message } from 'antd'
 import useCreateSpeech from '../../customhooks/speeches/useCreateSpeech'
+import { useSpeecher } from '@speecher/client'
 import { requiredRule } from './rules'
 import './styles.less'
 
@@ -15,6 +16,7 @@ const successCallback = () => {
 }
 
 const SpeechForm = () => {
+  const { user } = useSpeecher()
   const [form] = useForm()
   const [responseData, createSpeech] = useCreateSpeech({
     successCallback
@@ -29,7 +31,7 @@ const SpeechForm = () => {
     const variables = {
       title,
       body,
-      user_id: 2,
+      user_id: user.id,
       date: date.format('YYYY-MM-DD')
     }
 

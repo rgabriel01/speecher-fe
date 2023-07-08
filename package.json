@@ -42,5 +42,11 @@
   "devDependencies": {
     "less": "^4.1.3",
     "less-loader": "^11.1.3"
+  },
+  "workspaces": {
+    "packages": [
+      "src/*",
+      "src/packages/@speecher/*"
+    ]
   }
 }
