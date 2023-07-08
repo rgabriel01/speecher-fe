@@ -12,7 +12,7 @@ const successCallback = () => {
   message.success('Speech created!', 3)
   setTimeout(() => {
     window.location.reload()
-  }, 3000)
+  }, 1000)
 }
 
 const SpeechForm = () => {

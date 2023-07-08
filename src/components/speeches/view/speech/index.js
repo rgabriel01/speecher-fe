@@ -13,7 +13,7 @@ const successCallback = () => {
   message.success('Speech updated!', 3)
   setTimeout(() => {
     window.location.reload()
-  }, 3000)
+  }, 1000)
 }
 
 const Speech = ({
@@ -42,6 +42,14 @@ const Speech = ({
     }
     updateSpeech({ variables })
     console.log('onFinish', values)
+  }
+  const onDelete = () => {
+    const variables = {
+      id,
+      deleted: true
+    }
+
+    updateSpeech({ variables })
   }
 
   useEffect(() => {
@@ -73,6 +81,7 @@ const Speech = ({
               <Button
                 type='ghost'
                 className='-mr-16'
+                onClick={onDelete}
               >
                 Delete
               </Button>
